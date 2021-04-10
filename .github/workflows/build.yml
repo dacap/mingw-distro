@@ -1,0 +1,25 @@
+name: build
+on: [push]
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]
+    steps:
+    - uses: actions/checkout@v2
+    - uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        install: >-
+          cmake
+          diffutils
+          make
+          nasm
+          patch
+          tar
+          texinfo
+    - name: Building
+      shell: bash
+      run: |
+        bash 1_build_everything.sh
