@@ -19,6 +19,15 @@ jobs:
           patch
           tar
           texinfo
+    - name: Downloading Files
+      shell: bash
+      run: |
+        bash a_download_files.sh
+    - name: Cache Files
+      uses: actions/cache@v2
+      with:
+        path: files
+        key: ${{ runner.os }}-files
     - name: Building
       shell: bash
       run: |
